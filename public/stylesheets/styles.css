@@ -11,6 +11,8 @@
     --dark: #000B1C;
     /* --font-style: 'Nunito Sans', sans-serif;*/
     --font-style: 'Montserrat', sans-serif;
+    --form-hideText: #8F7CEC;
+    --submit-color: #CBBDDB;
 }
 
 h1 {
@@ -122,4 +124,82 @@ button span::before{
     height: fit-content;
     width: 100%;
     max-height: 300px;
+}
+
+/***** Username Form *****/
+
+.login-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    padding: 30px;
+    transform: translate(-50%, -50%);
+    background: var(--secondary);
+    box-shadow: 0 15px 25px rgba(143,124,236,0.7);
+    border-radius: 10px;
+}
+
+.login-box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: var(--text-primary);
+    text-align: left;
+}
+
+.login-box .username-box input {
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--text-primary);
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid var(--text-primary);
+    outline: none;
+    background: transparent;
+}
+
+.login-box .username-box label {
+    position: relative;
+    left: 0;
+    top: -60px;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--text-primary);
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.login-box .username-box input:focus~label{
+    top: -85px;
+    left: 0;
+    color: var(--form-hideText);
+    font-size: 12px;
+}
+
+.button-form #submit {
+    padding: 10px 20px;
+    color: var(--submit-color);
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    border: 1px solid var(--form-hideText);
+    margin: auto;
+}
+
+#submit:hover {
+    background: var(--form-hideText);
+    color: var(--text-primary);
+    border-radius: 5px;
+    box-shadow: 0 0 5px var(--form-hideText), 0 0 25px var(--form-hideText), 0 0 50px var(--form-hideText), 0 0 100px var(--form-hideText)ñ
+}
+
+.button-form {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
 }
