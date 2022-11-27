@@ -1,3 +1,4 @@
+require 'sinatra'
 class ApplicationController < Sinatra::Base
   configure do
     set :views, 'app/views'
@@ -6,5 +7,9 @@ class ApplicationController < Sinatra::Base
 
   get '/' do
     erb :index
+  end
+
+  get '/question' do
+    "question"
   end
 end

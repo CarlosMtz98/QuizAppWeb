@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz App</title>
+  <link rel="stylesheet" type="text/css" href="pruebas/stylesheets/styles.css">
+</head>
+<body>
+<div class="navbar">
+  <div style="text-align: center" class="logo">
+    <h1>Quiz App</h1>
+  </div>
+</div>
+<div class="results-box">
+  <div class="results-grid">
+    <h2 class="username-display"><%= @username %></h2>
+    <div class="results-spacer"></div>
+    <h2 class="score-display">Score <%= (@correctAnswers*100) / @noOfQuestions %></h2>
+    <h2 class="score-display"><%= @correctAnswers %> / <%= @noOfQuestions %></h2>
+    <div class="results-spacer"></div>
+    <p>Results review</p>
+    <div class="resultsQuestions-grid">
+      <div class="questionAnswer-display">
+        <h3>Question</h3>
+        <p>Answer</p>
+      </div>
+      <div class="questionAnswer-display">
+        <h3>Question</h3>
+        <p>Answer</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -456,6 +456,115 @@ ul.boxs-container li input[type="checkbox"] {
     font-size: 140%;
     width: 60px;
 }
+
+/***** Correct Answer *****/
+
+.check-img{
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%,0);
+    height: 30%;
+}
+
+.correctAnswer{
+    color: var(--text-primary);
+    font-size: 42px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%,0);
+}
+
+.continueButton {
+    position: absolute;
+    background: #27ae60;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    bottom: 5%;
+    right: 3%;
+    height: 45px;
+    width: 120px;
+    color: var(--text-primary);
+}
+
+/***** Wrong Answer *****/
+
+.wrongAnswer{
+    color: var(--text-primary);
+    font-size: 36px;
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    top: 52%;
+    transform: translate(-50%,0);
+}
+
+.wrongAnswerCorrection {
+    color: var(--text-primary);
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+/***** Results *****/
+
+.results-box {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    width: 70%;
+    height: auto;
+    padding: 30px;
+    transform: translate(-50%, 0);
+    background: var(--secondary);
+    box-shadow: 0 15px 25px rgba(143,124,236,0.7);
+    border-radius: 10px;
+    color: var(--text-primary);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 25px;
+}
+
+.username-display {
+    text-align: center;
+}
+
+.score-display {
+    text-align: center;
+}
+
+.resultsQuestions-grid {
+    background: black;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20px;
+    width: 80%;
+    display: grid;
+    border: 5px var(--form-hideText);
+    grid-template-columns: 95%;
+    grid-gap: 10px;
+}
+
+.questionAnswer-display {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    width: 90%;
+    background: var(--tertiary);
+}
+
+.questionAnswer-display h3{
+    padding-bottom: 10px;
+}
+
 /*
 .question-box button {
     display: inline-block;

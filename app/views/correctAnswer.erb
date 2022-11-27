@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz App</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+</head>
+<body>
+<div class="navbar">
+  <div style="text-align: center" class="logo">
+    <h1>Quiz App</h1>
+  </div>
+</div>
+<div class="question-box">
+  <label>Progress:</label>
+  <progress value="<%= @answeredQuestions %>" max="<%= @noOfQuestions %>">progress</progress>
+  <img class="check-img" src="images/check.png" alt="">
+  <div class="spacer"></div>
+  <span class="correctAnswer">Correct Answer!</span>
+  <a href="/nextQuestion">
+    <button class="continueButton">
+      Continue
+    </button>
+  </a>
+</div>
+</body>
+</html>
