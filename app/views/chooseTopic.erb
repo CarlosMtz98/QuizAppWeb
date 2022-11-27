@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Quiz App</title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+  <link rel="stylesheet" type="text/css" href="pruebas/stylesheets/styles.css">
 </head>
 <body>
 <div class="navbar">
@@ -18,9 +18,16 @@
   <h2 style="text-align: center">Select Topic</h2>
   <div class="selectTopic-container">
     <ul class="boxs-container">
+      <%= form_with url: "/startQuiz", method: :get do |form| %>
+        <li><%= form.check_box :checkbox-1 %><%= form.label :checkbox-1, "Design Patterns" %></li>
+        <li><%= form.check_box :checkbox-2 %><%= form.label :checkbox-2, "Refactoring" %></li>
+        <li><%= form.check_box :checkbox-3 %><%= form.label :checkbox-3, "Random" %></li>
+        <!--
       <li><input type="checkbox" id="checkbox-1" value="DesignPatterns"><label for="checkbox-1">Design Patterns</label></li>
       <li><input type="checkbox" id="checkbox-2" value="Refactoring"><label for="checkbox-2">Refactoring</label></li>
       <li><input type="checkbox" id="checkbox-3" value="Random"><label for="checkbox-3">Random</label></li>
+      -->
+      <% end %>
     </ul>
   </div>
   <div class="button-form">
