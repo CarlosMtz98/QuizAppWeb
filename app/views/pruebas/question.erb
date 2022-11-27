@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz App</title>
+  <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+</head>
+<body>
+<div class="navbar">
+  <div style="text-align: center" class="logo">
+    <h1>Quiz App</h1>
+  </div>
+</div>
+<div class="question-box">
+  <label>Progress:</label>
+  <progress value="<%= @answeredQuestions %>" max="<%= @noOfQuestions %>">progress</progress>
+  <h2 style="text-align: center"><%= @currentQuestion %></h2>
+  <div class="spacer"></div>
+  <div class="button-container">
+      <div class="singleButton-container">
+        <a href="/answer/0">
+        <button class="btn btn-1"><%= @answers[0] %>
+        </button>
+        </a>
+      </div>
+    <div class="singleButton-container">
+    <a href="/answer/1">
+    <button class="btn btn-2"><%= @answers[1] %>
+    </button>
+    </a>
+    </div>
+      <div class="singleButton-container">
+    <a href="/answer/2">
+    <button class="btn btn-3"><%= @answers[2] %>
+    </button>
+    </a>
+      </div>
+        <div class="singleButton-container">
+    <a href="/answer/3">
+    <button class="btn btn-4"><%= @answers[3] %>
+    </button>
+    </a>
+        </div>
+  </div>
+</div>
+</body>
+</html>
