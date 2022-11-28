@@ -6,4 +6,4 @@ require 'require_all'
 
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
-require_all 'app'
+require_all 'src'

@@ -12,7 +12,7 @@ class ApplicationController < Sinatra::Base
 
 
   configure do
-    set :views, 'app/views'
+    set :views, 'src/views'
     set :public_folder, 'public'
     enable :sessions
   end
