@@ -1,0 +1,5 @@
+= \Greeter Documentation
+
+This is the home page of the _Greeter_ web application documentation.
+
+Check the \README page to see the details regarding the application's design and architecture.

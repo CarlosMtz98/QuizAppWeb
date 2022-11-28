@@ -1,0 +1,34 @@
+= Application Design and Architecture
+
+This documentation was developed as part of a programming activity for the <em>Software Design and Architecture</em> course (_Tc3049_), at the Tecnológico de Monterrey, Campus Estado de México.
+
+== Authors
+
+* *A01375577* <em>Carlos Martínez Rodríguez</em>
+* *A01374561* <em>José Francisco Murillo Lozano</em>
+
+== Overview
+
+The <b>template method pattern</b> is a GoF behavioral design pattern that defines a skeleton algorithm in an abstract class. It lets subclasses redefine some steps of the skeleton without changing the algorithm's structure.
+
+The UML diagram for this programming activity is as follows:
+
+rdoc-image:img/template_method_uml.png
+
+To test the program, go inside the +src+ folder
+
+    cd src
+
+Then type the following instruction at the command line:
+
+    ruby -I . -w table_generator_test.rb
+
+== References
+
+- \M. Fowler. <em>UML Distilled: A Brief Guide to the Standard Object Modeling Language, 3rd Edition.</em>  Addison-Wesley, 2003.
+
+- \E. Gamma, R. Helm, R. Johnson, J. M. Vlissides. <em>Design Patterns: Elements of Reusable Object-Oriented Software.</em> Addison-Wesley, 1994.
+
+- \R. Olsen. <em>Design Patterns in Ruby.</em> Addison-Wesley, 2007.
+
+- Ruby-Doc.org. <em>RDoc Markup Reference.</em> {\http://ruby-doc.org/stdlib-2.4.1/libdoc/rdoc/rdoc/RDoc/Markup.html}[http://ruby-doc.org/stdlib-2.4.1/libdoc/rdoc/rdoc/RDoc/Markup.html] Accessed August 20, 2022.

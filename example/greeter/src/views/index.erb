@@ -1,0 +1,13 @@
+<form method="post">
+  <p>
+    <label for="language">Please select a language:</label>
+    <select id="language" name="language">
+    <% @languages.each do |language| %>
+      <option value="<%= language %>"><%= language %></option>
+    <% end %>
+    </select>
+  </p>
+  <p>
+    <input type="submit" value="Continue" />
+  </p>
+</form>

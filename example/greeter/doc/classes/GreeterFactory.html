@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+<head>
+<title>GreeterFactory</title>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+<link href='../css/style.css' media='screen' rel='stylesheet' type='text/css'>
+<script type='text/javascript'>
+  function popupCode(url) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  
+  function toggleCode(id) {
+    var code = document.getElementById(id)
+  
+    code.style.display = code.style.display != 'block' ? 'block' : 'none'
+    return true
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+</script>
+</head>
+<body class='page'>
+<div class='class' id='wrapper'>
+<div class='header'>
+<h1 class='name'><span class='type'>class</span>
+GreeterFactory
+</h1>
+<ol class='paths'>
+<li>
+<a href="../files/src/models/greeter_factory_rb.html">src/models/greeter_factory.rb</a>
+</li>
+</ol>
+<div class='parent'>
+Superclass:
+<strong>Object</strong>
+</div>
+</div>
+<div id='content'>
+<div id='text'>
+<div id='description'>
+<p>The <code>GreeterFactory</code> is an implementation of the <a href="https://en.wikipedia.org/wiki/Factory_method_pattern">Simple Factory Pattern</a>. It allows you to create instances of the <a href="Greeter.html"><code>::Greeter</code></a> class by calling the <a href="GreeterFactory.html#method-c-create"><code>::create</code></a> class method.</p>
+</div>
+<div id='method-list'>
+<h2>Methods</h2>
+<h3>Public Class</h3>
+<ol>
+<li><a href="#method-c-available_languages">available_languages</a></li>
+<li><a href="#method-c-create">create</a></li>
+</ol>
+</div>
+<div id='context'>
+</div>
+<div id='section'>
+<div id='methods'>
+<h2>Public Class methods</h2>
+<div class='method public-class' id='method-method-c-available_languages'>
+<a name='method-c-available_languages'></a>
+<div class='synopsis'>
+<span class='name'>available_languages</span><span class='arguments'>()</span>
+
+</div>
+<div class='description'>
+
+<p>Get all the language names that are available for creating greeter objects.</p>
+<table class="rdoc-list note-list"><tbody><tr><td class='label'>Returns</td><td>
+<p>An array with the name of the languages.</p>
+</td></tr></tbody></table>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-available_languages-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-c-available_languages-source'><span class="ruby-comment"># File src/models/greeter_factory.rb, line 20</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">available_languages</span>&#x000A;  <span class="ruby-identifier">@@greetings</span>.<span class="ruby-identifier">keys</span>&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<div class='method public-class' id='method-method-c-create'>
+<a name='method-c-create'></a>
+<div class='synopsis'>
+<span class='name'>create</span><span class='arguments'>(language)</span>
+
+</div>
+<div class='description'>
+
+<p>Creates a new greeter object.</p>
+<table class="rdoc-list note-list"><tbody><tr><td class='label'>Parameter</td><td><table class="rdoc-list note-list"><tbody><tr><td class='label'>language</td><td>
+<p>The language for the greeter object that will be created.</p>
+</td></tr></tbody></table>
+</td></tr><tr><td class='label'>Returns</td><td>
+<p>The newly created greeter object.</p>
+</td></tr><tr><td class='label'>Raises</td><td>
+<p><code>ArgumentError</code> if <code>language</code> is unknown.</p>
+</td></tr></tbody></table>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-create-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-c-create-source'><span class="ruby-comment"># File src/models/greeter_factory.rb, line 33</span>&#x000A;<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">language</span>)&#x000A;  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Unknow language: &#39;#{ language}&#39;&quot;</span>) \&#x000A;    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">@@greetings</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">language</span>)&#x000A;  <span class="ruby-constant">Greeter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">language</span>, <span class="ruby-identifier">@@greetings</span>[<span class="ruby-identifier">language</span>])&#x000A;<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div id='footer-push'></div>
+</div>
+<div id='footer'>
+<a href="https://github.com/rdoc/hanna-nouveau"><strong>Hanna Nouveau</strong> RDoc template</a>
+</div>
+</body>
+</html>
