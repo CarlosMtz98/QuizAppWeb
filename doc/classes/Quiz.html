@@ -45,13 +45,16 @@ Superclass:
 <h2>Methods</h2>
 <h3>Public Class</h3>
 <ol>
+<li><a href="#method-c-checkAnswer">checkAnswer</a></li>
+<li><a href="#method-c-get_quiz_by_id">get_quiz_by_id</a></li>
 <li><a href="#method-c-get_top_rank">get_top_rank</a></li>
 <li><a href="#method-c-new">new</a></li>
+<li><a href="#method-c-parse_quiz_instance_answer">parse_quiz_instance_answer</a></li>
+<li><a href="#method-c-parse_quiz_instance_from_response">parse_quiz_instance_from_response</a></li>
 </ol>
 <h3>Public Instance</h3>
 <ol>
 <li><a href="#attribute-i-answers">answers</a></li>
-<li><a href="#method-i-checkAnswer">checkAnswer</a></li>
 <li><a href="#attribute-i-correct_answers">correct_answers</a></li>
 <li><a href="#method-i-finish_quiz">finish_quiz</a></li>
 <li><a href="#method-i-get_questions">get_questions</a></li>
@@ -89,56 +92,56 @@ Superclass:
 <td class='context-item-name'>
 <a name='attribute-i-answers'>answers</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-correct_answers'>correct_answers</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-grade'>grade</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-id'>id</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-questions'>questions</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-type'>type</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-username'>username</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-wrong_answer'>wrong_answer</a>
 </td>
-<td class='context-item-value'>[R]</td>
+<td class='context-item-value'>[RW]</td>
 <td class='context-item-desc'></td>
 </tr>
 </table>
@@ -146,6 +149,64 @@ Superclass:
 </div>
 <div id='methods'>
 <h2>Public Class methods</h2>
+<div class='method public-class' id='method-method-c-checkAnswer'>
+<a name='method-c-checkAnswer'></a>
+<div class='synopsis'>
+<span class='name'>checkAnswer</span><span class='arguments'>(quizId, question_id, answerId)</span>
+
+</div>
+<div class='description'>
+
+<p>Calls on the “Check Answer” microservice and returns the response.body to the controller</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-checkAnswer-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-c-checkAnswer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">checkAnswer</span>(<span class="ruby-identifier">quizId</span>, <span class="ruby-identifier">question_id</span>, <span class="ruby-identifier">answerId</span>)
+    <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{quizId}/add-answer&quot;</span>
+    <span class="ruby-identifier">data</span> = {
+        <span class="ruby-value">questionId:</span> <span class="ruby-identifier">question_id</span>,
+        <span class="ruby-value">optionId:</span> <span class="ruby-identifier">answerId</span>
+    }
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">put</span>(<span class="ruby-identifier">url</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">data</span>), <span class="ruby-value">content_type:</span> <span class="ruby-string">&#39;application/json&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">success?</span>
+        <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;checking Answer ERROR&quot;</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<div class='method public-class' id='method-method-c-get_quiz_by_id'>
+<a name='method-c-get_quiz_by_id'></a>
+<div class='synopsis'>
+<span class='name'>get_quiz_by_id</span><span class='arguments'>(username,id)</span>
+
+</div>
+<div class='description'>
+
+<p>Get <a href="Quiz.html"><code>Quiz</code></a> by id from microservice</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-get_quiz_by_id-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-c-get_quiz_by_id-source'><span class="ruby-comment"># File src/models/quiz.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_quiz_by_id</span>(<span class="ruby-identifier">username</span>,<span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{id}&quot;</span>
+    <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">success?</span>
+        <span class="ruby-constant">Quiz</span>.<span class="ruby-identifier">parse_quiz_instance_from_response</span>(<span class="ruby-identifier">response</span>)
+    <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;getting Top Rank ERROR&quot;</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
 <div class='method public-class' id='method-method-c-get_top_rank'>
 <a name='method-c-get_top_rank'></a>
 <div class='synopsis'>
@@ -161,7 +222,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-get_top_rank-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-get_top_rank-source'><span class="ruby-comment"># File src/models/quiz.rb, line 82</span>
+<pre id='method-c-get_top_rank-source'><span class="ruby-comment"># File src/models/quiz.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_top_rank</span>
     <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;top-scores&quot;</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
@@ -196,39 +257,81 @@ Superclass:
 <span class="ruby-keyword">end</span></pre>
 </div>
 </div>
-<h2>Public Instance methods</h2>
-<div class='method public-instance' id='method-method-i-checkAnswer'>
-<a name='method-i-checkAnswer'></a>
+<div class='method public-class' id='method-method-c-parse_quiz_instance_answer'>
+<a name='method-c-parse_quiz_instance_answer'></a>
 <div class='synopsis'>
-<span class='name'>checkAnswer</span><span class='arguments'>(quizId, questionNo, answerId)</span>
+<span class='name'>parse_quiz_instance_answer</span><span class='arguments'>(quiz,answers)</span>
 
 </div>
 <div class='description'>
 
-<p>Calls on the “Check Answer” microservice and returns the response.body to the controller</p>
+<p>Sets quiz answers</p>
 
 </div>
 <div class='source'>
-<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-checkAnswer-source&#39;); return false'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-parse_quiz_instance_answer-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-checkAnswer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">checkAnswer</span>(<span class="ruby-identifier">quizId</span>, <span class="ruby-identifier">questionNo</span>, <span class="ruby-identifier">answerId</span>)
-    <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{quizId}/add-answer&quot;</span>
-    <span class="ruby-identifier">data</span> = {
-        <span class="ruby-value">questionId:</span> <span class="ruby-ivar">@questions</span>[<span class="ruby-identifier">questionNo</span>].<span class="ruby-identifier">id</span>,
-        <span class="ruby-value">optionId:</span> <span class="ruby-identifier">answerId</span>
-    }
-    <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">put</span>(<span class="ruby-identifier">url</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">data</span>), <span class="ruby-value">content_type:</span> <span class="ruby-string">&#39;application/json&#39;</span>)
-    <span class="ruby-identifier">puts</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">success?</span>
-        <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>
-    <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;checking Answer ERROR&quot;</span>
+<pre id='method-c-parse_quiz_instance_answer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_quiz_instance_answer</span>(<span class="ruby-identifier">quiz</span>,<span class="ruby-identifier">answers</span>)
+    <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">answers</span> = []
+    <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">correct_answers</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">wrong_answer</span> = <span class="ruby-value">0</span>
+    <span class="ruby-identifier">answers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ans</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">is_correct</span> = <span class="ruby-identifier">ans</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;isCorrect&#39;</span>)
+        <span class="ruby-identifier">correct_answer</span> = <span class="ruby-identifier">ans</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;correctAnswer&#39;</span>)
+        <span class="ruby-identifier">question_id</span> = <span class="ruby-identifier">ans</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;questionId&#39;</span>)
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_correct</span>
+            <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">correct_answers</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">wrong_answer</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">answer</span> = <span class="ruby-constant">Answer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">is_correct</span>, <span class="ruby-identifier">correct_answer</span>, <span class="ruby-identifier">question_id</span>)
+        <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">answers</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">answer</span>
     <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
 </div>
 </div>
+<div class='method public-class' id='method-method-c-parse_quiz_instance_from_response'>
+<a name='method-c-parse_quiz_instance_from_response'></a>
+<div class='synopsis'>
+<span class='name'>parse_quiz_instance_from_response</span><span class='arguments'>(response)</span>
+
+</div>
+<div class='description'>
+
+<p>Creates <a href="Quiz.html"><code>Quiz</code></a> instance from microservice reesponse</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-parse_quiz_instance_from_response-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-c-parse_quiz_instance_from_response-source'><span class="ruby-comment"># File src/models/quiz.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_quiz_instance_from_response</span>(<span class="ruby-identifier">response</span>)
+    <span class="ruby-identifier">body</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
+    <span class="ruby-identifier">quiz</span> = <span class="ruby-constant">Quiz</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">body</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;entity&#39;</span>,<span class="ruby-string">&#39;userName&#39;</span>))
+    <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">questions</span> = []
+    <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">id</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;entity&#39;</span>, <span class="ruby-string">&#39;id&#39;</span>)
+    <span class="ruby-identifier">questions_data</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;entity&#39;</span>, <span class="ruby-string">&#39;questions&#39;</span>)
+    <span class="ruby-identifier">questions_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">options_data</span> = <span class="ruby-identifier">q</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;options&#39;</span>)
+        <span class="ruby-identifier">options</span> = []
+        <span class="ruby-identifier">options_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">options</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Option</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">o</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;id&#39;</span>), <span class="ruby-identifier">o</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;text&#39;</span>))
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">questions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Question</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">q</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;id&#39;</span>), <span class="ruby-identifier">q</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;value&#39;</span>), <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">grade</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;entity&#39;</span>, <span class="ruby-string">&#39;grade&#39;</span>)
+    <span class="ruby-identifier">answers</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;entity&#39;</span>, <span class="ruby-string">&#39;answers&#39;</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">answers</span>.<span class="ruby-identifier">nil?</span>
+        <span class="ruby-constant">Quiz</span>.<span class="ruby-identifier">parse_quiz_instance_answer</span>(<span class="ruby-identifier">quiz</span>,<span class="ruby-identifier">answers</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">quiz</span>
+<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<h2>Public Instance methods</h2>
 <div class='method public-instance' id='method-method-i-finish_quiz'>
 <a name='method-i-finish_quiz'></a>
 <div class='synopsis'>
@@ -244,7 +347,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-finish_quiz-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-finish_quiz-source'><span class="ruby-comment"># File src/models/quiz.rb, line 70</span>
+<pre id='method-i-finish_quiz-source'><span class="ruby-comment"># File src/models/quiz.rb, line 51</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">finish_quiz</span>
     <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{@id}/finish&quot;</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">url</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>({}), <span class="ruby-value">content_type:</span> <span class="ruby-string">&#39;application/json&#39;</span>)
@@ -280,11 +383,9 @@ Superclass:
         <span class="ruby-comment"># quantity: noOfQuestions</span>
     }
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">post</span>(<span class="ruby-constant">BASE_URL</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">data</span>), <span class="ruby-value">content_type:</span> <span class="ruby-string">&#39;application/json&#39;</span>)
-    <span class="ruby-identifier">puts</span> <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">success?</span>
         <span class="ruby-identifier">parse_quiz_response</span>(<span class="ruby-identifier">response</span>)
         <span class="ruby-ivar">@id</span>
-        <span class="ruby-identifier">puts</span> <span class="ruby-ivar">@questions</span>
     <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Getting Questions ERROR&quot;</span>
     <span class="ruby-keyword">end</span>

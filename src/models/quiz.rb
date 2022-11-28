@@ -12,7 +12,7 @@ class Quiz
 
     BASE_URL = "https://4ko7zrz5rs7orwgxcsdphnerrm0gzkwb.lambda-url.us-east-1.on.aws/quiz/"
 
-    attr_reader :username, :type, :questions, :id, :correct_answers, :wrong_answer, :answers, :grade
+    attr_accessor :username, :type, :questions, :id, :correct_answers, :wrong_answer, :answers, :grade
 
     # Initializes the Quiz instance with
     # given values
@@ -38,30 +38,11 @@ class Quiz
             # quantity: noOfQuestions
         }
         response = Faraday.post(BASE_URL, JSON.dump(data), content_type: 'application/json')
-        puts JSON.parse(response.body)
         if response.success?
             parse_quiz_response(response)
             @id
-            puts @questions
         else
             puts "Getting Questions ERROR"
-        end
-    end
-
-    # Calls on the "Check Answer"
-    # microservice and returns the response.body to the controller
-    def checkAnswer(quizId, questionNo, answerId)
-        url = BASE_URL + "#{quizId}/add-answer"
-        data = {
-            questionId: @questions[questionNo].id,
-            optionId: answerId
-        }
-        response = Faraday.put(url, JSON.dump(data), content_type: 'application/json')
-        puts JSON.parse(response.body)
-        if response.success?
-            response.body
-        else
-            puts "checking Answer ERROR"
         end
     end
 
@@ -77,6 +58,22 @@ class Quiz
         end
     end
 
+    # Calls on the "Check Answer"
+    # microservice and returns the response.body to the controller
+    def self.checkAnswer(quizId, question_id, answerId)
+        url = BASE_URL + "#{quizId}/add-answer"
+        data = {
+            questionId: question_id,
+            optionId: answerId
+        }
+        response = Faraday.put(url, JSON.dump(data), content_type: 'application/json')
+        if response.success?
+            response.body
+        else
+            puts "checking Answer ERROR"
+        end
+    end
+
     # Gets top scores
     # from microservice
     def self.get_top_rank
@@ -86,6 +83,62 @@ class Quiz
             JSON.parse(response.body)
         else
             puts "getting Top Rank ERROR"
+        end
+    end
+
+    # Get Quiz by
+    # id from microservice
+    def self.get_quiz_by_id(username,id)
+        url = BASE_URL + "#{id}"
+        response = Faraday.get(url)
+        if response.success?
+            Quiz.parse_quiz_instance_from_response(response)
+        else
+            puts "getting Top Rank ERROR"
+        end
+    end
+
+    # Creates Quiz instance from microservice
+    # reesponse
+    def self.parse_quiz_instance_from_response(response)
+        body = JSON.parse(response.body)
+        quiz = Quiz.new(body.dig('entity','userName'))
+        quiz.questions = []
+        quiz.id = body.dig('entity', 'id')
+        questions_data = body.dig('entity', 'questions')
+        questions_data.each do |q|
+            options_data = q.dig('options')
+            options = []
+            options_data.each do |o|
+                options << Option.new(o.dig('id'), o.dig('text'))
+            end
+            quiz.questions << Question.new(q.dig('id'), q.dig('value'), options)
+        end
+        quiz.grade = body.dig('entity', 'grade')
+        answers = body.dig('entity', 'answers')
+        unless answers.nil?
+            Quiz.parse_quiz_instance_answer(quiz,answers)
+        end
+        quiz
+    end
+
+    # Sets quiz
+    # answers
+    def self.parse_quiz_instance_answer(quiz,answers)
+        quiz.answers = []
+        quiz.correct_answers = 0
+        quiz.wrong_answer = 0
+        answers.each do |ans|
+            is_correct = ans.dig('isCorrect')
+            correct_answer = ans.dig('correctAnswer')
+            question_id = ans.dig('questionId')
+            if is_correct
+                quiz.correct_answers += 1
+            else
+                quiz.wrong_answer += 1
+            end
+            answer = Answer.new(is_correct, correct_answer, question_id)
+            quiz.answers << answer
         end
     end
 
