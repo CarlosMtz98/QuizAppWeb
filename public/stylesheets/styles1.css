@@ -1,0 +1,23 @@
+/********** Template CSS **********/
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+:root {
+    --text-primary: #fff;
+    --button-anim-color: #54E6E7;
+    --secondary: #242026;
+    --tertiary: #555555;
+    --light: #DFE4FD;
+    --dark: #000B1C;
+    /* --font-style: 'Nunito Sans', sans-serif;*/
+    --font-style: 'Montserrat', sans-serif;
+    --form-hideText: #8F7CEC;
+    --submit-color: #CBBDDB;
+}
+
+body {
+    font-family: var(--font-style);
+    width: 100%;
+    background: white;
+    color: var(--text-primary)
+}

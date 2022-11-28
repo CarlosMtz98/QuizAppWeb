@@ -1,32 +1,106 @@
-<div class="question-box">
-  <label>Progress:</label>
-  <progress value="<%= @answeredQuestions %>" max="<%= @noOfQuestions %>">progress</progress>
-  <h2 style="text-align: center"><%= @currentQuestion %></h2>
-  <div class="spacer"></div>
-  <div class="button-container">
-      <div class="singleButton-container">
-        <a href="/answer/0">
-        <button class="btn btn-1"><%= @answers[0] %>
-        </button>
-        </a>
+<script>
+  function showSubmitButton(){
+    let btn = document.getElementById('submitAnswerButton');
+    btn.classList.remove('visually-hidden');
+  }
+</script>
+<form method="POST" action="/nextQuestion">
+  <div class="card text-center" style="min-height: 60vh; margin-top: 60px">
+    <div class="card-header">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: <%= @progress %>%;" aria-valuenow="<%= @progress %>" aria-valuemin="0" aria-valuemax="100"><%= @progress %>%</div>
       </div>
-    <div class="singleButton-container">
-    <a href="/answer/1">
-    <button class="btn btn-2"><%= @answers[1] %>
-    </button>
-    </a>
     </div>
-      <div class="singleButton-container">
-    <a href="/answer/2">
-    <button class="btn btn-3"><%= @answers[2] %>
-    </button>
-    </a>
-      </div>
-        <div class="singleButton-container">
-    <a href="/answer/3">
-    <button class="btn btn-4"><%= @answers[3] %>
-    </button>
-    </a>
+    <div class="card-body align-content-center" style="display: flex; flex-direction: column">
+      <div id="question" style="display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1">
+        <div class="container" style="margin-top: auto; margin-bottom: auto">
+          <h5 class="card-title" id="questionId" value="<%= @quizModel.questions[@answeredQuestions].id %>"><%= @quizModel.questions[@answeredQuestions].value %></h5>
         </div>
+        <div class="container" style="margin-bottom: 40px">
+          <div class="row align-items-center">
+            <% noOfAnswers = 4 %>
+            <% noOfAnswers.times do |index| %>
+              <% opt = @quizModel.questions[@answeredQuestions].options[index] || Option.new("123","Prueba") %>
+              <div class="col-6">
+                <input type="radio" name="options" class="btn-check" value="<%= opt.id %>" id="option<%= index %>" autocomplete="off" onclick="showSubmitButton()">
+                  <label style="margin-top: 20px" class="btn btn-secondary" for="option<%= index %>"><%= opt.text %></label>
+                </input>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div id="correctAnswer" class="visually-hidden">
+        <img src="images/check.png" style="height: 120px; margin-top: 50px"></img>
+        <h5 class="card-title" style="margin-top: 20px" >Correct Answer!</h5>
+      </div>
+      <div id="wrongAnswer" class="visually-hidden">
+        <img src="images/remove.png" style="height: 120px; margin-top: 50px"></img>
+        <h5 class="card-title" style="margin-top: 20px" >The correct answer was:</h5>
+        <p class="card-text" id="correctAnswerText">correct answer</p>
+      </div>
+    </div>
+    <div class="card-footer text-muted" style="min-height: 55px">
+      <div class="row align-items-center" style="min-height: 38px">
+        <div class="col" style="text-align: left; padding-left: 30px;"><%= @answeredQuestions+1 %> of <%= @quizModel.questions.length %> Questions</div>
+        <div class="col"></div>
+        <div class="col">
+          <div id="submitButtonDiv">
+            <button type="button" id="submitAnswerButton" class="btn btn-primary">Submit Answer</a>
+          </div>
+          <div id="nextQuestionDiv" class="visually-hidden">
+            <button class="btn btn-primary">
+              <% if @answeredQuestions+1 == @quizModel.questions.length %>
+                Finish
+              <% else %>
+                Continue
+              <% end %>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</form>
+<script>
+  var btn = document.getElementById('submitAnswerButton');
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    let selectedAnswer = document.querySelector('input[name="options"]:checked');
+    const data = JSON.stringify({
+        selectedAnswerId: selectedAnswer.value
+      });
+    fetch('/checkAnswer',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data
+    })
+    .then((response) => response.json())
+    .then((result) => {
+      if (result['success?']){
+        if (result.entity['correct?']){
+          let correctAnswerDiv = document.getElementById('correctAnswer');
+          correctAnswerDiv.classList.remove("visually-hidden");
+        }else{
+          let wrongAnswerDiv = document.getElementById('wrongAnswer');
+          wrongAnswerDiv.classList.remove("visually-hidden");
+          let p = document.getElementById('correctAnswerText');
+          p.innerHTML = result.entity.correctAnswer
+        }
+        let nextQuestionDiv = document.getElementById('nextQuestionDiv');
+        nextQuestionDiv.classList.remove("visually-hidden");
+        let questionDiv = document.getElementById('question');
+        questionDiv.classList.add("visually-hidden");
+        let submitButtonDiv = document.getElementById('submitButtonDiv');
+        submitButtonDiv.classList.add("visually-hidden");
+      }else{
+        console.error("Result unsuccessful");
+      }
+    })
+    .catch((error) => {
+      console.error("Error: ", error);
+    });
+  });
+</script>

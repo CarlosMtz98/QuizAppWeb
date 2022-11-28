@@ -1,23 +1,34 @@
-<div style="color: white; text-align: center; position: absolute; top: 25%; left: 50%; transform: translate(-50%,0)" class="username-display">
-  <h2>Welcome <%= @username %>!</h2>
-</div>
-<div class="selectTopic-box">
-  <h2 style="text-align: center">Select Topic</h2>
-  <div class="selectTopic-container">
-    <ul class="boxs-container">
-      <%= form_with url: "/startQuiz", method: :get do |form| %>
-        <li><%= form.check_box :checkbox-1 %><%= form.label :checkbox-1, "Design Patterns" %></li>
-        <li><%= form.check_box :checkbox-2 %><%= form.label :checkbox-2, "Refactoring" %></li>
-        <li><%= form.check_box :checkbox-3 %><%= form.label :checkbox-3, "Random" %></li>
-        <!--
-      <li><input type="checkbox" id="checkbox-1" value="DesignPatterns"><label for="checkbox-1">Design Patterns</label></li>
-      <li><input type="checkbox" id="checkbox-2" value="Refactoring"><label for="checkbox-2">Refactoring</label></li>
-      <li><input type="checkbox" id="checkbox-3" value="Random"><label for="checkbox-3">Random</label></li>
-      -->
-      <% end %>
-    </ul>
+<div class="container">
+  <div class="row align-items-end" style="min-height: 300px">
+    <div class="col"></div>
+    <div class="col text-center">
+      <h2>Welcome <%= @quizModel.username %>!</h2>
+      <br>
+      <h3>Select Topic</h3>
+    </div>
+    <div class="col"></div>
   </div>
-  <div class="button-form">
-    <a id="submit" href="/chooseTopic">Start</a>
+  <div class="row align-items-center" style="min-height: 150px">
+    <div class="col"></div>
+    <div class="col text-center">
+      <form method="POST" action="/startQuiz">
+        <div class="row">
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" value="DesignPatterns" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">Design Patterns</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" value="Refactoring" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2">Refactoring</label>
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" value="Random" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio3">Random</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"><button type="submit" class="btn btn-primary" id="usernameBtn" style="margin-top: 20px">Submit</button></div>
+          <div class="col"></div>
+        </div>
+      </form>
+    </div>
+    <div class="col"></div>
   </div>
 </div>
