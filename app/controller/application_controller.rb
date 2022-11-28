@@ -1,44 +1,62 @@
+# Final Project: Quiz Application with Microservices
+# Date: 28-Nov-2022
+# Authors:
+#          A01375577 Carlos Martínez
+#          A01374561 Paco Murillo
+# File: application_controller.rb
 require 'sinatra'
 
+# This class inherits from the Sinatra::Base to
+# allow us to create our own AppController
 class ApplicationController < Sinatra::Base
+
 
   configure do
     set :views, 'app/views'
     set :public_folder, 'public'
     enable :sessions
   end
-
   configure(:development) { set :session_secret, "8d9282e008bbb5c0850b7ec52474936796325658aa6ffaf29124f88ca7ed61a1" }
 
+  # Defines 'GET' on '/'
+  # runs index.erb
   get '/' do
     erb :index
   end
 
+  # Defines 'GET' on '/getUsername'
+  # runs getUsername.erb
   get '/getUsername' do
     erb :getUsername
   end
 
+  # Defines 'POST' on '/getUsername'
+  # creates a new Quiz instance with the username passed redirects to '/chooseTopic'
   post '/getUsername' do
     session['quizModel'] = Quiz.new(params['username'])
     puts "#{session[:quizModel].username} hello from post /getUsername"
     redirect "/chooseTopic"
   end
 
+  # Defines 'GET' on '/chooseTopic'
+  # runs chooseTopic.erb
   get '/chooseTopic' do
-    puts "hello from get /chooseTopic #{session['quizModel'].username}"
     @quizModel = session['quizModel']
     erb :chooseTopic
   end
 
+  # Defines 'POST' on '/startQuiz'
+  # sets the Quiz instance's type and makes it call on the "Create Quiz" microservice then redirects to '/question'
   post '/startQuiz' do
     @quizModel = session['quizModel']
     @quizModel.setType(params['btnradio'])
     session['id'] = @quizModel.getQuestions(0)
-    puts "hello from post /startQuiz #{@quizModel.type}"
     session['answeredQuestions'] = 0
     redirect '/question'
   end
 
+  # Defines 'GET' on '/question'
+  # runs question.erb
   get '/question' do
     puts "hello from get /question #{session['quizModel'].type}"
     @quizModel = session['quizModel']
@@ -47,15 +65,18 @@ class ApplicationController < Sinatra::Base
     erb :question
   end
 
+  # Defines 'POST' on '/checkAnswer'
+  # Makes Quiz instance call on "Check Answer" microservice and returns response.body
   post '/checkAnswer' do
     puts "hello from post /checkAnswer"
     req = JSON.parse(request.body.read)
-    puts req
     session['quizModel'].checkAnswer(session['id'],
       session['answeredQuestions'],
       req['selectedAnswerId'])
   end
 
+  # Defines 'POST' on '/nextQuestion'
+  # Updates session values if user has not finished the Quiz redirects to '/question' else redirects to '/results'
   post '/nextQuestion' do
     session['answeredQuestions'] += 1
     answeredQuestions = session['answeredQuestions']
@@ -68,6 +89,8 @@ class ApplicationController < Sinatra::Base
     end
   end
 
+  # Defines 'GET' on '/results'
+  # Makes Quiz instance call on "Finish" microservice then runs results.erb
   get '/results' do
     @correctAnswers = 8
     @noOfQuestions = 10
