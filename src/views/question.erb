@@ -18,9 +18,7 @@
         </div>
         <div class="container" style="margin-bottom: 40px">
           <div class="row align-items-center">
-            <% noOfAnswers = 4 %>
-            <% noOfAnswers.times do |index| %>
-              <% opt = @quizModel.questions[@answeredQuestions].options[index] || Option.new("123","Prueba") %>
+            <% @quizModel.questions[@answeredQuestions].options.each_with_index do |opt, index| %>
               <div class="col-6">
                 <input type="radio" name="options" class="btn-check" value="<%= opt.id %>" id="option<%= index %>" autocomplete="off" onclick="showSubmitButton()">
                   <label style="margin-top: 20px" class="btn btn-secondary" for="option<%= index %>"><%= opt.text %></label>
@@ -31,11 +29,11 @@
         </div>
       </div>
       <div id="correctAnswer" class="visually-hidden">
-        <img src="images/check.png" style="height: 120px; margin-top: 50px"></img>
+        <img src="images/check.png" style="height: 120px; margin-top: 50px" />
         <h5 class="card-title" style="margin-top: 20px" >Correct Answer!</h5>
       </div>
       <div id="wrongAnswer" class="visually-hidden">
-        <img src="images/remove.png" style="height: 120px; margin-top: 50px"></img>
+        <img src="images/remove.png" style="height: 120px; margin-top: 50px" />
         <h5 class="card-title" style="margin-top: 20px" >The correct answer was:</h5>
         <p class="card-text" id="correctAnswerText">correct answer</p>
       </div>
@@ -44,7 +42,7 @@
       <div class="row align-items-center" style="min-height: 38px">
         <div class="col" style="text-align: left; padding-left: 30px;"><%= @answeredQuestions+1 %> of <%= @quizModel.questions.length %> Questions</div>
         <div class="col"></div>
-        <div class="col">
+        <div class="col" style="text-align: right; padding-right: 30px;">
           <div id="submitButtonDiv">
             <a type="button" id="submitAnswerButton" class="btn btn-primary">Submit Answer</a>
           </div>
