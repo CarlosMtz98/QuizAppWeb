@@ -38,9 +38,11 @@ class Quiz
             # quantity: noOfQuestions
         }
         response = Faraday.post(BASE_URL, JSON.dump(data), content_type: 'application/json')
+        puts JSON.parse(response.body)
         if response.success?
             parse_quiz_response(response)
             @id
+            puts @questions
         else
             puts "Getting Questions ERROR"
         end
@@ -66,10 +68,8 @@ class Quiz
     # Calls on the "Finish"
     # microservice and returns the response.body to the controller
     def finish_quiz
-        puts "ID: #{@id}"
         url = BASE_URL + "#{@id}/finish"
         response = Faraday.post(url, JSON.dump({}), content_type: 'application/json')
-        puts JSON.parse(response.body)
         if response.success?
             parse_quiz_response(response)
         else
@@ -77,15 +77,27 @@ class Quiz
         end
     end
 
+    # Gets top scores
+    # from microservice
+    def self.get_top_rank
+        url = BASE_URL + "top-scores"
+        response = Faraday.get(url)
+        if response.success?
+            JSON.parse(response.body)
+        else
+            puts "getting Top Rank ERROR"
+        end
+    end
+
     private
 
-    # Parses the response from the microservice
+    # Parses the response
+    # from the microservice
     def parse_quiz_response(response)
         body = JSON.parse(response.body)
         @questions = []
         @id = body.dig('entity', 'id')
         questions_data = body.dig('entity', 'questions')
-        puts body
         questions_data.each do |q|
             options_data = q.dig('options')
             options = []
@@ -101,9 +113,9 @@ class Quiz
         end
     end
 
-    # Parse the answers object
+    # Parse the
+    # answers object
     def parse_quiz_answer(answers)
-        puts answers
         @answers = []
         @correct_answers = 0
         @wrong_answer = 0

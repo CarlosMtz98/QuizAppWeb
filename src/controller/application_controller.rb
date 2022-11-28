@@ -42,15 +42,18 @@ class ApplicationController < Sinatra::Base
   # runs chooseTopic.erb
   get '/chooseTopic' do
     @quizModel = session['quizModel']
+    if @quizModel.nil?
+      redirect '/'
+    end
     erb :chooseTopic
   end
 
   # Defines 'POST' on '/startQuiz'
   # sets the Quiz instance's type and makes it call on the "Create Quiz" microservice then redirects to '/question'
   post '/startQuiz' do
-    @quizModel = session['quizModel']
-    @quizModel.setType(params['btnradio'])
-    session['id'] = @quizModel.get_questions(0)
+    session['quizModel'].setType(params['btnradio'])
+    session['id'] = session['quizModel'].get_questions(0)
+    puts session['id']
     session['answeredQuestions'] = 0
     redirect '/question'
   end
@@ -94,8 +97,12 @@ class ApplicationController < Sinatra::Base
   get '/results' do
     @quizModel = session['quizModel']
     @quizModel.finish_quiz
-    @quizModel.correct_answers
     erb :results
+  end
+
+  get '/topRank' do
+    @top_scorers = Quiz.get_top_rank()
+    erb :topRank
   end
 
 end

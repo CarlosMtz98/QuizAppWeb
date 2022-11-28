@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang='en'>
+<head>
+<title>Option</title>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+<link href='../css/style.css' media='screen' rel='stylesheet' type='text/css'>
+<script type='text/javascript'>
+  function popupCode(url) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+  
+  function toggleCode(id) {
+    var code = document.getElementById(id)
+  
+    code.style.display = code.style.display != 'block' ? 'block' : 'none'
+    return true
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln('<' + 'style type="text/css">.method .source pre { display: none }<\/style>')
+</script>
+</head>
+<body class='page'>
+<div class='class' id='wrapper'>
+<div class='header'>
+<h1 class='name'><span class='type'>class</span>
+Option
+</h1>
+<ol class='paths'>
+<li>
+<a href="../files/src/models/option_rb.html">src/models/option.rb</a>
+</li>
+</ol>
+<div class='parent'>
+Superclass:
+<strong>Object</strong>
+</div>
+</div>
+<div id='content'>
+<div id='text'>
+<div id='description'>
+<p>Model class that defines any option with :id and :text(the literal answer in string)</p>
+</div>
+<div id='method-list'>
+<h2>Methods</h2>
+<h3>Public Class</h3>
+<ol>
+<li><a href="#method-c-new">new</a></li>
+</ol>
+<h3>Public Instance</h3>
+<ol>
+<li><a href="#attribute-i-id">id</a></li>
+<li><a href="#attribute-i-text">text</a></li>
+<li><a href="#method-i-to_s">to_s</a></li>
+</ol>
+</div>
+<div id='context'>
+</div>
+<div id='section'>
+<div id='attribute-list'>
+<h2 class='section-bar'>Attributes</h2>
+<div class='name-list'>
+<table>
+<tr class='top-aligned-row context-row'>
+<td class='context-item-name'>
+<a name='attribute-i-id'>id</a>
+</td>
+<td class='context-item-value'>[R]</td>
+<td class='context-item-desc'></td>
+</tr>
+<tr class='top-aligned-row context-row'>
+<td class='context-item-name'>
+<a name='attribute-i-text'>text</a>
+</td>
+<td class='context-item-value'>[R]</td>
+<td class='context-item-desc'></td>
+</tr>
+</table>
+</div>
+</div>
+<div id='methods'>
+<h2>Public Class methods</h2>
+<div class='method public-class' id='method-method-c-new'>
+<a name='method-c-new'></a>
+<div class='synopsis'>
+<span class='name'>new</span><span class='arguments'>(id, text)</span>
+
+</div>
+<div class='description'>
+
+<p>Initializes the <a href="Option.html"><code>Option</code></a> instance with given values</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-new-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/option.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">text</span>)
+    <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id</span>
+    <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">text</span>
+<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+<h2>Public Instance methods</h2>
+<div class='method public-instance' id='method-method-i-to_s'>
+<a name='method-i-to_s'></a>
+<div class='synopsis'>
+<span class='name'>to_s</span><span class='arguments'>()</span>
+
+</div>
+<div class='description'>
+
+<p>Returns a string representation of the <a href="Option.html"><code>Option</code></a> object</p>
+
+</div>
+<div class='source'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-to_s-source&#39;); return false'>
+[show source]
+</a>
+<pre id='method-i-to_s-source'><span class="ruby-comment"># File src/models/option.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+    <span class="ruby-node">&quot;Option: #{@id}, #{@text}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div id='footer-push'></div>
+</div>
+<div id='footer'>
+<a href="https://github.com/jeremyevans/hanna-nouveau"><strong>Hanna Nouveau</strong> RDoc template</a>
+</div>
+</body>
+</html>
