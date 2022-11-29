@@ -9,7 +9,14 @@
 # any question with :id, :value(the literal question in string) and :options(array of multiple answers with one correct)
 class Question
 
-    attr_reader :id, :value, :options
+    # This Question's id
+    attr_reader :id
+
+    # This Question's text value
+    attr_reader :value
+
+    # This Question's options
+    attr_reader :options
 
     # Initializes the Question instance with
     # given values

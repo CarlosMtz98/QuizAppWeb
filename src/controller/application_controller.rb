@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
   # Defines 'GET' on '/getUsername'
   # runs getUsername.erb
   get '/getUsername' do
-    erb :getUsername
+    erb :get_username
   end
 
   # Defines 'POST' on '/getUsername'
@@ -44,16 +44,16 @@ class ApplicationController < Sinatra::Base
     if @username.nil?
       redirect '/'
     end
-    erb :chooseTopic
+    erb :choose_topic
   end
 
   # Defines 'POST' on '/startQuiz'
   # sets the Quiz instance's type and makes it call on the "Create Quiz" microservice then redirects to '/question'
   post '/startQuiz' do
     @quiz = Quiz.new(session['username'])
-    @quiz.setType(params['btnradio'])
+    @quiz.set_type(params['btnradio'])
     session['id'] = @quiz.get_questions(0)
-    session['answeredQuestions'] = 0
+    session['answered_questions'] = 0
     session['no_of_questions'] = @quiz.questions.length
     redirect '/question'
   end
@@ -61,27 +61,26 @@ class ApplicationController < Sinatra::Base
   # Defines 'GET' on '/question'
   # runs question.erb
   get '/question' do
-    @quizModel = Quiz.get_quiz_by_id(session['username'],session['id'])
-    @answeredQuestions = session['answeredQuestions']
-    @progress = (@answeredQuestions + 1) * 100 / session['no_of_questions']
+    @quiz = Quiz.get_quiz_by_id(session['username'],session['id'])
+    @answered_questions = session['answered_questions']
+    @progress = (@answered_questions + 1) * 100 / session['no_of_questions']
     erb :question
   end
 
   # Defines 'POST' on '/checkAnswer'
   # Makes Quiz instance call on "Check Answer" microservice and returns response.body
   post '/checkAnswer' do
-    puts "hello from post /checkAnswer"
     req = JSON.parse(request.body.read)
-    Quiz.checkAnswer(session['id'],
-      req['questionId'],
-      req['selectedAnswerId'])
+    Quiz.check_answer(session['id'],
+      req['question_id'],
+      req['selected_answer_id'])
   end
 
   # Defines 'POST' on '/nextQuestion'
   # Updates session values if user has not finished the Quiz redirects to '/question' else redirects to '/results'
   post '/nextQuestion' do
-    session['answeredQuestions'] += 1
-    if session['answeredQuestions'] < session['no_of_questions']
+    session['answered_questions'] += 1
+    if session['answered_questions'] < session['no_of_questions']
       redirect '/question'
     else
       redirect '/results'
@@ -91,14 +90,14 @@ class ApplicationController < Sinatra::Base
   # Defines 'GET' on '/results'
   # Makes Quiz instance call on "Finish" microservice then runs results.erb
   get '/results' do
-    @quizModel = Quiz.get_quiz_by_id(session['username'],session['id'])
-    @quizModel.finish_quiz
+    @quiz = Quiz.get_quiz_by_id(session['username'],session['id'])
+    @quiz.finish_quiz
     erb :results
   end
 
   get '/topRank' do
     @top_scorers = Quiz.get_top_rank()
-    erb :topRank
+    erb :top_rank
   end
 
 end

@@ -3,16 +3,39 @@
 # Authors:
 #          A01375577 Carlos Martínez
 #          A01374561 Paco Murillo
-# File: option.rb
+# File: quiz.rb
 require 'faraday'
 
 # Model class that defines
 # any Quiz with :id, :username(of the User who created the Quiz), :type and :questions
 class Quiz
 
+    # Microservices base url
     BASE_URL = "https://4ko7zrz5rs7orwgxcsdphnerrm0gzkwb.lambda-url.us-east-1.on.aws/quiz/"
 
-    attr_accessor :username, :type, :questions, :id, :correct_answers, :wrong_answer, :answers, :grade
+    # This Quiz's creator username
+    attr_accessor :username
+
+    # This Quiz's type
+    attr_accessor :type
+
+    # This Quiz's questions
+    attr_accessor :questions
+
+    # This Quiz's id
+    attr_accessor :id
+
+    # This Quiz's number of correct answers
+    attr_accessor :correct_answers
+
+    # This Quiz's number of wrong answers
+    attr_accessor :wrong_answer
+
+    # This Quiz's answers
+    attr_accessor :answers
+
+    # This Quiz's grade
+    attr_accessor :grade
 
     # Initializes the Quiz instance with
     # given values
@@ -24,7 +47,7 @@ class Quiz
 
     # Sets the Quiz
     # type
-    def setType(type)
+    def set_type(type)
         @type = type
     end
 
@@ -60,7 +83,7 @@ class Quiz
 
     # Calls on the "Check Answer"
     # microservice and returns the response.body to the controller
-    def self.checkAnswer(quizId, question_id, answerId)
+    def self.check_answer(quizId, question_id, answerId)
         url = BASE_URL + "#{quizId}/add-answer"
         data = {
             questionId: question_id,

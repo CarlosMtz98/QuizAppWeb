@@ -45,7 +45,7 @@ Superclass:
 <h2>Methods</h2>
 <h3>Public Class</h3>
 <ol>
-<li><a href="#method-c-checkAnswer">checkAnswer</a></li>
+<li><a href="#method-c-check_answer">check_answer</a></li>
 <li><a href="#method-c-get_quiz_by_id">get_quiz_by_id</a></li>
 <li><a href="#method-c-get_top_rank">get_top_rank</a></li>
 <li><a href="#method-c-new">new</a></li>
@@ -61,7 +61,7 @@ Superclass:
 <li><a href="#attribute-i-grade">grade</a></li>
 <li><a href="#attribute-i-id">id</a></li>
 <li><a href="#attribute-i-questions">questions</a></li>
-<li><a href="#method-i-setType">setType</a></li>
+<li><a href="#method-i-set_type">set_type</a></li>
 <li><a href="#attribute-i-type">type</a></li>
 <li><a href="#attribute-i-username">username</a></li>
 <li><a href="#attribute-i-wrong_answer">wrong_answer</a></li>
@@ -79,7 +79,9 @@ Superclass:
 <td>=</td>
 <td class='context-item-value'>"https://4ko7zrz5rs7orwgxcsdphnerrm0gzkwb.lambda-url.us-east-1.on.aws/quiz/"</td>
 <td>&nbsp;</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>Microservices base url</p>
+</td>
 </tr>
 </table>
 </div>
@@ -93,66 +95,82 @@ Superclass:
 <a name='attribute-i-answers'>answers</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s answers</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-correct_answers'>correct_answers</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s number of correct answers</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-grade'>grade</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s grade</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-id'>id</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s id</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-questions'>questions</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s questions</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-type'>type</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s type</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-username'>username</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s creator username</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-wrong_answer'>wrong_answer</a>
 </td>
 <td class='context-item-value'>[RW]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Quiz&#39;s number of wrong answers</p>
+</td>
 </tr>
 </table>
 </div>
 </div>
 <div id='methods'>
 <h2>Public Class methods</h2>
-<div class='method public-class' id='method-method-c-checkAnswer'>
-<a name='method-c-checkAnswer'></a>
+<div class='method public-class' id='method-method-c-check_answer'>
+<a name='method-c-check_answer'></a>
 <div class='synopsis'>
-<span class='name'>checkAnswer</span><span class='arguments'>(quizId, question_id, answerId)</span>
+<span class='name'>check_answer</span><span class='arguments'>(quizId, question_id, answerId)</span>
 
 </div>
 <div class='description'>
@@ -161,11 +179,11 @@ Superclass:
 
 </div>
 <div class='source'>
-<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-checkAnswer-source&#39;); return false'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-check_answer-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-checkAnswer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">checkAnswer</span>(<span class="ruby-identifier">quizId</span>, <span class="ruby-identifier">question_id</span>, <span class="ruby-identifier">answerId</span>)
+<pre id='method-c-check_answer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">check_answer</span>(<span class="ruby-identifier">quizId</span>, <span class="ruby-identifier">question_id</span>, <span class="ruby-identifier">answerId</span>)
     <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{quizId}/add-answer&quot;</span>
     <span class="ruby-identifier">data</span> = {
         <span class="ruby-value">questionId:</span> <span class="ruby-identifier">question_id</span>,
@@ -195,7 +213,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-get_quiz_by_id-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-get_quiz_by_id-source'><span class="ruby-comment"># File src/models/quiz.rb, line 91</span>
+<pre id='method-c-get_quiz_by_id-source'><span class="ruby-comment"># File src/models/quiz.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_quiz_by_id</span>(<span class="ruby-identifier">username</span>,<span class="ruby-identifier">id</span>)
     <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{id}&quot;</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
@@ -222,7 +240,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-get_top_rank-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-get_top_rank-source'><span class="ruby-comment"># File src/models/quiz.rb, line 79</span>
+<pre id='method-c-get_top_rank-source'><span class="ruby-comment"># File src/models/quiz.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_top_rank</span>
     <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;top-scores&quot;</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">url</span>)
@@ -249,7 +267,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-new-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/quiz.rb, line 19</span>
+<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/quiz.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">username</span>)
     <span class="ruby-ivar">@username</span> = <span class="ruby-identifier">username</span>
     <span class="ruby-ivar">@questions</span> = []
@@ -272,7 +290,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-parse_quiz_instance_answer-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-parse_quiz_instance_answer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 127</span>
+<pre id='method-c-parse_quiz_instance_answer-source'><span class="ruby-comment"># File src/models/quiz.rb, line 150</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_quiz_instance_answer</span>(<span class="ruby-identifier">quiz</span>,<span class="ruby-identifier">answers</span>)
     <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">answers</span> = []
     <span class="ruby-identifier">quiz</span>.<span class="ruby-identifier">correct_answers</span> = <span class="ruby-value">0</span>
@@ -307,7 +325,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-parse_quiz_instance_from_response-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-parse_quiz_instance_from_response-source'><span class="ruby-comment"># File src/models/quiz.rb, line 103</span>
+<pre id='method-c-parse_quiz_instance_from_response-source'><span class="ruby-comment"># File src/models/quiz.rb, line 126</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_quiz_instance_from_response</span>(<span class="ruby-identifier">response</span>)
     <span class="ruby-identifier">body</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>)
     <span class="ruby-identifier">quiz</span> = <span class="ruby-constant">Quiz</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">body</span>.<span class="ruby-identifier">dig</span>(<span class="ruby-string">&#39;entity&#39;</span>,<span class="ruby-string">&#39;userName&#39;</span>))
@@ -347,7 +365,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-finish_quiz-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-finish_quiz-source'><span class="ruby-comment"># File src/models/quiz.rb, line 51</span>
+<pre id='method-i-finish_quiz-source'><span class="ruby-comment"># File src/models/quiz.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">finish_quiz</span>
     <span class="ruby-identifier">url</span> = <span class="ruby-constant">BASE_URL</span> <span class="ruby-operator">+</span> <span class="ruby-node">&quot;#{@id}/finish&quot;</span>
     <span class="ruby-identifier">response</span> = <span class="ruby-constant">Faraday</span>.<span class="ruby-identifier">post</span>(<span class="ruby-identifier">url</span>, <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">dump</span>({}), <span class="ruby-value">content_type:</span> <span class="ruby-string">&#39;application/json&#39;</span>)
@@ -374,7 +392,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-get_questions-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-get_questions-source'><span class="ruby-comment"># File src/models/quiz.rb, line 33</span>
+<pre id='method-i-get_questions-source'><span class="ruby-comment"># File src/models/quiz.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_questions</span>(<span class="ruby-identifier">noOfQuestions</span>)
     <span class="ruby-identifier">data</span> = {
         <span class="ruby-value">userName:</span> <span class="ruby-ivar">@username</span>,
@@ -392,10 +410,10 @@ Superclass:
 <span class="ruby-keyword">end</span></pre>
 </div>
 </div>
-<div class='method public-instance' id='method-method-i-setType'>
-<a name='method-i-setType'></a>
+<div class='method public-instance' id='method-method-i-set_type'>
+<a name='method-i-set_type'></a>
 <div class='synopsis'>
-<span class='name'>setType</span><span class='arguments'>(type)</span>
+<span class='name'>set_type</span><span class='arguments'>(type)</span>
 
 </div>
 <div class='description'>
@@ -404,11 +422,11 @@ Superclass:
 
 </div>
 <div class='source'>
-<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-setType-source&#39;); return false'>
+<a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-set_type-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-setType-source'><span class="ruby-comment"># File src/models/quiz.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setType</span>(<span class="ruby-identifier">type</span>)
+<pre id='method-i-set_type-source'><span class="ruby-comment"># File src/models/quiz.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_type</span>(<span class="ruby-identifier">type</span>)
     <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">type</span>
 <span class="ruby-keyword">end</span></pre>
 </div>
