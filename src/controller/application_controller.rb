@@ -24,6 +24,10 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
+  get '/about' do
+    erb :about
+  end
+
   # Defines 'GET' on '/getUsername'
   # runs getUsername.erb
   get '/getUsername' do
