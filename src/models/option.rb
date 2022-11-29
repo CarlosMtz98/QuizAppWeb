@@ -9,7 +9,11 @@
 # any option with :id and :text(the literal answer in string)
 class Option
 
-    attr_reader :id, :text
+    # This Option's id
+    attr_reader :id
+
+    # This Option's text
+    attr_reader :text
 
     # Initializes the Option instance with
     # given values

@@ -66,21 +66,27 @@ Superclass:
 <a name='attribute-i-correct_answer'>correct_answer</a>
 </td>
 <td class='context-item-value'>[R]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Answer&#39;s correct answer (only in case this was not the correct answer)</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-is_correct'>is_correct</a>
 </td>
 <td class='context-item-value'>[R]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Answer&#39;s is correct</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-question_id'>question_id</a>
 </td>
 <td class='context-item-value'>[R]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Answer&#39;s question id</p>
+</td>
 </tr>
 </table>
 </div>
@@ -95,12 +101,14 @@ Superclass:
 </div>
 <div class='description'>
 
+<p>Inits <a href="Answer.html"><code>Answer</code></a> with given params</p>
+
 </div>
 <div class='source'>
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-new-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/answer.rb, line 13</span>
+<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/answer.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">is_correct</span>, <span class="ruby-identifier">correct_answer</span>, <span class="ruby-identifier">question_id</span>)
   <span class="ruby-ivar">@is_correct</span> = <span class="ruby-identifier">is_correct</span>
   <span class="ruby-ivar">@correct_answer</span> = <span class="ruby-identifier">correct_answer</span>

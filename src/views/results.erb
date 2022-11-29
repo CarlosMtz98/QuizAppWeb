@@ -1,7 +1,7 @@
 <div class="card text-center" style="min-height: 60vh; margin-top: 60px">
     <div class="card-body align-content-center" style="display: flex; flex-direction: column">
-      <h2><%= @quizModel.username %></h2>
-      <h3>Your score: <%= @quizModel.grade %></h3>
+      <h2><%= @quiz.username %></h2>
+      <h3>Your score: <%= @quiz.grade %></h3>
       <div class="container">
         <table class="table table-bordered" style="margin-top: 30px">
           <thead>
@@ -12,12 +12,12 @@
           </tr>
           </thead>
           <tbody>
-            <% @quizModel.answers.each_with_index do |ans, index| %>
+            <% @quiz.answers.each_with_index do |ans, index| %>
               <tr>
                 <th scope="row"><%= index + 1  %></th>
                 <td style="text-align: left">
                   <div class="container">
-                    <p><%= @quizModel.questions.find { |q| q.id == ans.question_id }.value  %></p>
+                    <p><%= @quiz.questions.find { |q| q.id == ans.question_id }.value  %></p>
                     <% if !ans.is_correct %>
 
                     <strong>Correct answer:</strong>
@@ -37,7 +37,7 @@
         <div class="col" style="text-align: left; padding-left: 30px;">
           <div id="submitButtonDiv">
             <form action="/topRank" method="GET">
-              <button type="button" class="btn btn-primary">Top Rank</button>
+              <button type="submit" class="btn btn-primary">Top Rank</button>
             </form>
           </div>
         </div>

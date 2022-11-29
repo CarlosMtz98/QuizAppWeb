@@ -67,21 +67,27 @@ Superclass:
 <a name='attribute-i-id'>id</a>
 </td>
 <td class='context-item-value'>[R]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Question&#39;s id</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-options'>options</a>
 </td>
 <td class='context-item-value'>[R]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Question&#39;s options</p>
+</td>
 </tr>
 <tr class='top-aligned-row context-row'>
 <td class='context-item-name'>
 <a name='attribute-i-value'>value</a>
 </td>
 <td class='context-item-value'>[R]</td>
-<td class='context-item-desc'></td>
+<td class='context-item-desc'>
+<p>This Question&#39;s text value</p>
+</td>
 </tr>
 </table>
 </div>
@@ -103,7 +109,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-c-new-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/question.rb, line 16</span>
+<pre id='method-c-new-source'><span class="ruby-comment"># File src/models/question.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span>)
     <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">id</span>
     <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">value</span>
@@ -127,7 +133,7 @@ Superclass:
 <a class='source-toggle' href='#' onclick='toggleCode(&#39;method-i-to_s-source&#39;); return false'>
 [show source]
 </a>
-<pre id='method-i-to_s-source'><span class="ruby-comment"># File src/models/question.rb, line 24</span>
+<pre id='method-i-to_s-source'><span class="ruby-comment"># File src/models/question.rb, line 31</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Question: #{@id}, #{@value}&quot;</span>
     <span class="ruby-identifier">options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>
